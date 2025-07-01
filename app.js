@@ -8,7 +8,9 @@ app.use(express.urlencoded({extended:false}))
 
 app.get('/', Controller.home)
 app.get('/login', Controller.login)
+app.post('/login', Controller.postLogin)
 app.get('/register', Controller.register)
+app.post('/register', Controller.postRegister)
 
 
 app.listen(port, () => {

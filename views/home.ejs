@@ -20,7 +20,7 @@
       padding: 1rem 4rem;
       border-bottom: 1px solid #ddd;
       border-radius: 40px;
-      margin: 20px;
+      margin: 40px;
       max-width: 1500px;
     }
     .logo {
@@ -46,13 +46,16 @@
       gap: 1rem;
       height: 80px;
     }
-    .auth-buttons button {
+    .auth-buttons a {
       padding: 8px 50px;
       border-radius: 30px;
       font-weight: bold;
       border: none;
       cursor: pointer;
       font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .sign-in {
       background-color: white;
@@ -69,7 +72,15 @@
       justify-content: center;
       gap: 20px;
       align-items: center;
-      padding: 4rem 2rem;
+      padding: 3rem 2rem;
+      max-width: 80%;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.3); /* semi-transparent */
+      backdrop-filter: blur(40px); /* glass effect */
+      -webkit-backdrop-filter: blur(12px); /* Safari support */
+      border: 1px solid rgba(255, 255, 255, 0.2); /* subtle border */
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      color: white;
     }
     .hero-text {
       max-width: 50%;
@@ -85,8 +96,10 @@
       line-height: 1.5;
     }
     .hero-image img {
+      width: 100%;
       max-width: 1000px;
       border-radius: 20px;
+
     }
   </style>
 </head>
@@ -103,20 +116,20 @@
 
       </nav>
       <div class="auth-buttons">
-        <button class="sign-in">Sign In</button>
-        <button class="sign-up">Sign Up</button>
+        <a class="sign-in" href="/login">Sign In</a>
+        <a class="sign-up" href="/register">Sign Up</a>
       </div>
     </header>
+  
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Upgrade your skills, elevate your life</h1>
+        <p>Explore a wide range of professional and personal development courses. Gain the skills you need to succeed</p>
+      </div>
+      <div class="hero-image">
+        <img src="https://storage.googleapis.com/lashodia-product-image/11365282.jpg" alt="Man with headphone" />
+      </div>
+    </section>
   </center>
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Upgrade your skills, elevate your life</h1>
-      <p>Explore a wide range of professional and personal development courses. Gain the skills you need to succeed</p>
-    </div>
-    <div class="hero-image">
-      <img src="https://storage.googleapis.com/lashodia-product-image/11365282.jpg" alt="Man with headphone" />
-    </div>
-  </section>
-
 </body>
 </html>

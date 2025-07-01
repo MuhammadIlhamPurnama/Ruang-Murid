@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - Ruang Murid</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #26c0a3;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-wrapper {
+      background-color: white;
+      border-radius: 30px;
+      padding: 80px 100px;
+      width: 100%;
+      max-width: 800px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+      font-size: 80px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 40px;
+      background: linear-gradient(to right, #1c375b, #6f8197, #cd4236);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h2 {
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 60px;
+      color: #1c375b;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 30px;
+      color: #333;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="name"],
+    select {
+      width: 100%;
+      padding: 16px 18px;
+      font-size: 30px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      font-size: 30px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      background-color: #d2f55c;
+      color: #1c375b;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #bde948;
+    }
+
+    .extra {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 24px;
+    }
+
+    .extra a {
+      color: #26c0a3;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .extra a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <div class="logo">Ruang Murid</div>
+    <h2>Sign Up Your Account</h2>
+    <form action="/register" method="post">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="name" name="name" id="name" placeholder="Example">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" name="email" id="email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter your password">
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select name="role" id="role">
+          <option selected disabled>-- Select Role --</option>
+          <option value="Student">Student</option>
+          <option value="Teacher">Teacher</option>
+        </select>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <div class="extra">
+      <p>Already have an account? <a href="/login">Sign In</a></p>
+    </div>
+  </div>
+
+</body>
+</html>
