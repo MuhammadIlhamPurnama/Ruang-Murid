@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    get formatDate(){
+      return this.birthDate.toISOString().split('T')[0]
+    }
+
     static associate(models) {
       // define association here
       Profile.belongsTo(models.User, {foreignKey: "UserId"})

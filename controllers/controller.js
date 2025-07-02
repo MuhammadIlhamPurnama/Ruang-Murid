@@ -1,9 +1,10 @@
-const {User} = require("../models/")
+const {User, Profile} = require("../models/")
 const bcrypt = require('bcryptjs')
 class Controller {
   static async home (req, res) {
     try {
-      res.render('home')
+      let user = req.session.user
+      res.render('home', {user})
     } catch (error) {
       res.send(error)
     }
@@ -26,6 +27,12 @@ class Controller {
       if (user) {
         let checkPass = bcrypt.compareSync(password, user.password)
         if (checkPass) {
+
+          req.session.user = {
+            id: user.id,
+            role: user.role
+          }
+
           return res.redirect('/')
         }else {
           const error = "Invalid email/password"
@@ -55,7 +62,67 @@ class Controller {
 
       await User.create({name, email, password, role})
 
+      let user = await User.findOne({where: {email}})
+
+      req.session.user = {
+        id: user.id,
+        role: user.role
+      }
+
       res.redirect('/')
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  static async profile (req,res) {
+    try {
+      let userSession = req.session.user
+      let user = await User.findByPk(userSession.id, {
+        include: Profile
+      })
+      res.render('profile', {user})
+    } catch (error) {
+      res.send(error) 
+    }
+  }
+
+  static async editProfile (req,res) {
+    try {
+      let userSession = req.session.user
+
+      let userProfile = await Profile.findOne({where: {UserId : userSession.id}})
+      console.log(userProfile)
+      res.render('edit-profile', {userProfile})
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  static async postEditProfile (req, res) {
+    try {
+      let userSession = req.session.user
+      let { phone, birthDate, photo, bio} = req.body
+
+      let profile = await Profile.findOne({where: {UserId: userSession.id}})
+      
+      if (profile) {
+        await profile.update({
+          phone,
+          birthDate,
+          photo,
+          bio
+        })
+      } else {
+        await Profile.create({
+          phone,
+          birthDate,
+          photo,
+          bio,
+          UserId : userSession.id
+        })
+      }
+      res.redirect('/profile')
     } catch (error) {
       res.send(error)
     }

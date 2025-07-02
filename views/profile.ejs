@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Profil Ilham Purnama</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background: linear-gradient(135deg, #26a69a, #80cbc4);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .profile-container {
+    background-color: rgba(38, 166, 154, 0.85);
+    max-width: 900px;
+    width: 100%;
+    border-radius: 16px;
+    padding: 40px 50px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+  }
+
+  .profile-image {
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 4px solid #dce775;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.25);
+    background-color: #aad4c8;
+  }
+
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .profile-info {
+    flex-grow: 1;
+  }
+
+  .profile-info h1 {
+    font-size: 2.8rem;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+  }
+
+  .profile-info p.email,
+  .profile-info p.role {
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 2px 0;
+  }
+
+  .section-title {
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: 40px 0 20px 0;
+    border-bottom: 2px solid #dce775;
+    padding-bottom: 6px;
+    max-width: fit-content;
+  }
+
+  .profile-details p {
+    font-size: 1.1rem;
+    margin: 12px 0;
+  }
+
+  .profile-details p strong {
+    font-weight: 700;
+  }
+
+  .button-edit {
+    background-color: #D2F55C;
+    color: #0B3D2D;
+    padding: 8px 50px;
+    border-radius: 30px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  @media (max-width: 720px) {
+    body {
+      padding: 20px;
+    }
+    .profile-container {
+      flex-direction: column;
+      padding: 30px 25px;
+      max-width: 420px;
+    }
+
+    .profile-image {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 25px auto;
+      border-width: 3px;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+    }
+
+    .profile-info {
+      text-align: center;
+    }
+
+    .profile-info h1 {
+      font-size: 2.2rem;
+    }
+    
+    .profile-info p.email,
+    .profile-info p.role {
+      font-size: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      margin: 30px 0 15px 0;
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .profile-details p {
+      font-size: 1rem;
+    }
+  }
+
+  header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 1rem 4rem;
+      border-bottom: 1px solid #ddd;
+      border-radius: 40px;
+      margin: 40px;
+      width: 100%;
+      max-width: 1500px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 30px;
+      color: #0B3D2D;
+    }
+    
+    nav a {
+      margin: 0 10px;
+      color: #0B3D2D;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 24px;
+    }
+    nav a.active {
+      color: #177255
+    }
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+      height: 70px;
+    }
+    .auth-buttons a {
+      padding: 8px 50px;
+      border-radius: 30px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+    .sign-in {
+      background-color: white;
+      border: 2px solid #D2F55C !important;
+      color: #0B3D2D;
+    }
+    .sign-up {
+      background-color: #D2F55C;
+      color: #0B3D2D;
+    }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      Ruang Murid
+    </div>
+    <nav>
+      <a href="/" class="active">Home</a>
+      <a href="#">Courses</a>
+
+    </nav>
+    <div class="auth-buttons">
+      <% if (!user) { %>
+        <a class="sign-in" href="/login">Sign In</a>
+        <a class="sign-up" href="/register">Sign Up</a>
+      <% } else { %>
+        <a class="sign-up" href="/profile">Profile</a>
+      <% } %>
+    </div>
+  </header>
+  <main class="profile-container" role="main" aria-labelledby="profile-name">
+    <div class="profile-image" aria-label="Foto profil Ilham Purnama, seorang pria dengan latar belakang asap berwarna gelap">
+      <img src="<%=  user.Profile ? user.Profile.photo : '' %>" alt="Profile Photo" />
+    </div>
+    <section class="profile-info" aria-label="Informasi profil Ilham Purnama">
+      <h1 id="profile-name"><%= user.name %></h1>
+      <p class="email"><strong>Email:</strong> <%= user.email %></p>
+      <p class="role"><strong>Role:</strong> <%= user.role %></p>
+
+      <h2 class="section-title" id="profile-details-title">Profile Info</h2>
+      <div class="profile-details" aria-labelledby="profile-details-title">
+        <p><strong>Phone:</strong> <%= user.Profile ? user.Profile.phone : '' %></p>
+        <p><strong>Birth Date:</strong> <%= user.Profile? user.Profile.formatDate : '' %></p>
+        <p><strong>Bio:</strong> <%= user.Profile ? user.Profile.bio : '' %></p>
+      </div>
+      <div>
+        <a class="button-edit" href="/profile/edit">Edit</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+

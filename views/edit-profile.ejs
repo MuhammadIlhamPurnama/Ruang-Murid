@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile - Ruang Murid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #28c59d;
+      color: #0B3D2D;
+      box-sizing: border-box;
+    }
+
+    .profile-form {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      color: white;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+
+    .profile-form h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    input[type="file"] {
+      padding: 8px;
+      background-color: white;
+      color: black;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #D2F55C;
+      color: #0B3D2D;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #c4e84f;
+    }
+
+    @media (max-width: 600px) {
+      .profile-form {
+        padding: 20px;
+      }
+
+      .profile-form h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <form class="profile-form" action="/profile/edit" method="POST">
+    <h2>Edit Profile</h2>
+
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" name="phone" value="<%= userProfile ? userProfile.phone : '' %>">
+
+    <label for="birthDate">Birth Date</label>
+    <input type="date" id="birthDate" name="birthDate" value="<%= userProfile ? userProfile.formatDate : '' %>">
+
+    <label for="photo">Profile Photo</label>
+    <input type="text" id="photo" name="photo" value="<%= userProfile ? userProfile.photo : '' %>">
+
+    <label for="bio">Bio</label>
+    <textarea id="bio" name="bio" rows="4"><%= userProfile ? userProfile.bio : '' %></textarea>
+
+    <button type="submit">Save Changes</button>
+  </form>
+
+</body>
+</html>
