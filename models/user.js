@@ -1,4 +1,5 @@
 'use strict';
+const hashPassword = require('../helpers/helper')
 const {
   Model
 } = require('sequelize');
@@ -13,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasOne(models.Profile, {foreignKey: "UserId"})
-      User.belongsToMany(models.Course, {through: models.UserCourse, foreignKey: "UserId"})
+      User.hasMany(models.UserCourse, {foreignKey: "UserId"})
       User.hasMany(models.Course, {foreignKey: "TeacherId"})
     }
   }
@@ -69,9 +70,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate: (user) => {
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(user.password, salt)
-        user.password = hash
+        hashPassword(user)
       }
     },
     sequelize,

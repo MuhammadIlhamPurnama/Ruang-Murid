@@ -82,7 +82,7 @@
 
   <div class="form-container">
     <h2>Create New Course</h2>
-    <form action="/courses" method="POST">
+    <form action="/courses/create" method="POST">
       <label for="title">Course Title</label>
       <input type="text" id="title" name="title" placeholder="e.g. Web Development with Laravel" required>
 
@@ -90,7 +90,7 @@
       <textarea id="description" name="description" rows="5" placeholder="Course details and learning outcomes..." required></textarea>
 
       <label for="category">Category</label>
-      <select id="category" name="categoryId" required>
+      <select id="category" name="CategoryId" required>
         <option selected disabled>-- Select Category --</option>
         <% categories.forEach(el => { %>
          <option value="<%= el.id %>"><%= el.name %></option>

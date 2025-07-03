@@ -110,6 +110,11 @@
   <div class="login-wrapper">
     <div class="logo">Ruang Murid</div>
     <h2>Sign Up Your Account</h2>
+    <% if (errors) { %>
+     <p style="color: #cd4236;">
+      <%= errors %>
+     </p>
+    <% } %>
     <form action="/register" method="post">
       <div class="form-group">
         <label for="name">Name</label>

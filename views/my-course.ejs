@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Courses - Ruang Murid</title>
+  <title>My Courses - Ruang Murid</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
   <style>
     body {
@@ -37,7 +37,7 @@
       backdrop-filter: blur(12px);
       border-radius: 16px;
       padding: 24px;
-      color: black;
+      color: white;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
     }
@@ -136,45 +136,6 @@
       color: #0B3D2D;
       
     }
-
-    form {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-
-input[type="text"] {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 30px;
-  width: 800px;
-  transition: all 0.3s ease;
-}
-
-input[type="text"]:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-input[type="submit"] {
-  padding: 0.5rem 1.2rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 30px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
   </style>
 </head>
 <body>
@@ -186,9 +147,7 @@ input[type="submit"]:hover {
       <nav>
         <a href="/" class="active">Home</a>
         <a href="/courses">Courses</a>
-        <% if (user.role === 'Teacher') { %>
-          <a href="/courses/create">Create Course</a>
-        <% } %>
+        <a href="/my-course">My Course</a>
       </nav>
       <div class="auth-buttons">
         <% if (!user) { %>
@@ -203,31 +162,14 @@ input[type="submit"]:hover {
   </center>
 
   <div class="container">
-    <center>
-      <form action="/courses" method="get">
-        <input type="text" name="search">
-        <input type="submit">
-      </form>
-    </center>
-    <h1>Available Courses</h1>
-    <% if (errors) { %>
-     <center>
-       <p style="color: red; margin-bottom: 40px;"><%= errors %></p>
-     </center>
-    <% } %>
-    <% if (notif) { %>
-     <center>
-       <p style="color: red; margin-bottom: 40px;"><%= notif %></p>
-     </center>
-    <% } %>
+    <h1>My Courses</h1>
     <div class="courses-grid">
-      <% courses.forEach(el => { %>
+      <% user.forEach(el => { %>
         <div class="course-card">
-          <h2><%= el.title %></h2>
-          <p><%= el.description %></p>
-          <div class="course-category"><%= el.Category.name %></div>
-          <form action="/courses/<%= el.id %>/enroll" method="post"> <button class="sign-in" type="submit">Enroll</button></form>
-          <form action="/courses/<%= el.id %>/delete" method="get"> <button class="sign-in" type="submit">Delete</button></form>
+          <h2><%= el.Course.title %></h2>
+          <p><%= el.Course.description %></p>
+          <div class="course-category"><%= el.Course.Category.name %></div>
+            <button class="sign-in">View</button>
         </div>
       <% }) %>
     </div>

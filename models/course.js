@@ -12,8 +12,23 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Course.belongsTo(models.Category, {foreignKey: "CategoryId"})
-      Course.belongsToMany(models.User, {through: models.UserCourse, foreignKey:'CourseId'})
+      Course.hasMany(models.UserCourse, {foreignKey:'CourseId'})
       Course.belongsTo(models.User, {foreignKey: "TeacherId"})
+    }
+
+    static async getCourseById(id) {
+      try {
+        const course = await Course.findOne({
+          where: { id },
+          include: [
+            { model: sequelize.models.Category },
+            { model: sequelize.models.User, as: "User", foreignKey: "TeacherId" }, 
+          ]
+        });
+        return course
+      } catch (error) {
+        throw error
+      }
     }
   }
   Course.init({

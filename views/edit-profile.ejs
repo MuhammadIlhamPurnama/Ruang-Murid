@@ -87,7 +87,11 @@
 
   <form class="profile-form" action="/profile/edit" method="POST">
     <h2>Edit Profile</h2>
-
+    <% if (errors) { %>
+     <p style="color: #cd4236;">
+      <%= errors %>
+     </p>
+    <% } %>
     <label for="phone">Phone</label>
     <input type="text" id="phone" name="phone" value="<%= userProfile ? userProfile.phone : '' %>">
 

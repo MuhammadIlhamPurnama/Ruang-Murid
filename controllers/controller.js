@@ -1,9 +1,12 @@
-const {User, Profile, Category, Course} = require("../models/")
+const { Op } = require("sequelize");
+const {User, Profile, Category, Course, UserCourse} = require("../models/")
 const bcrypt = require('bcryptjs')
+const sendEmail = require('../helpers/nodemailer')
 class Controller {
   static async home (req, res) {
     try {
       let user = req.session.user
+      
       res.render('home', {user})
     } catch (error) {
       res.send(error)
@@ -12,6 +15,7 @@ class Controller {
   static async login (req, res) {
     try {
       const {errors} = req.query
+      sendEmail()
       res.render('login', {errors})
     } catch (error) {
       res.send(error)
@@ -52,7 +56,8 @@ class Controller {
 
   static async register (req, res) {
     try {
-      res.render('register')
+      let {errors} = req.query
+      res.render('register', {errors})
     } catch (error) {
       res.send(error)
     }
@@ -73,7 +78,12 @@ class Controller {
 
       res.redirect('/')
     } catch (error) {
-      res.send(error)
+      if (error.name === 'SequelizeValidationError') {
+        let errors = error.errors.map(el => el.message)
+        res.redirect(`/register?errors=${errors}`)
+      } else {
+        res.send(error)
+      }
     }
   }
 
@@ -91,11 +101,12 @@ class Controller {
 
   static async editProfile (req,res) {
     try {
+      let {errors} = req.query
       let userSession = req.session.user
 
       let userProfile = await Profile.findOne({where: {UserId : userSession.id}})
       console.log(userProfile)
-      res.render('edit-profile', {userProfile})
+      res.render('edit-profile', {userProfile, errors})
     } catch (error) {
       res.send(error)
     }
@@ -126,14 +137,34 @@ class Controller {
       }
       res.redirect('/profile')
     } catch (error) {
-      res.send(error)
+      if (error.name === 'SequelizeValidationError') {
+        let errors = error.errors.map(el => el.message)
+        res.redirect(`/profile/edit?errors=${errors}`)
+      } else {
+        res.send(error)
+      }
     }
   }
 
   static async showCourses (req, res) {
     try {
+      let {errors} = req.query
+      let {search, notif} = req.query 
       let user = req.session.user
-      res.render('courses', {user})
+      let courses = await Course.findAll({
+        include: Category
+      })
+      if (search) {
+        courses = await Course.findAll({
+          include: Category,
+          where: {
+            title: {
+              [Op.iLike]: `%${search}%`
+            }
+          }
+        })
+      }
+      res.render('courses', {user, courses, errors, notif})
     } catch (error) {
       res.send(error)
     }
@@ -165,7 +196,67 @@ class Controller {
         description,
         CategoryId
       })
-      res.redirect('/')
+      res.redirect('/courses')
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  static async enrollCourse (req, res) {
+    try {
+      let {id} = req.params
+      let user = req.session.user
+      let check = await UserCourse.findOne({
+        where: {
+          UserId: user.id,
+          CourseId: id
+        }
+      })
+      if (!check) {
+        await UserCourse.create({
+          UserId: user.id,
+          CourseId: id,
+          enrolledAt: new Date(),
+          progress: 'in progress'
+        })    
+      } else {
+        res.redirect('/courses?errors=already enroll this course')
+      }
+      res.redirect('/courses')
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  static async showMyCourses (req, res) {
+    try {
+      let {id} = req.session.user
+      let user = await User.findAll( {
+        include: {
+          model: UserCourse,
+          include: {
+            model: Course,
+            include: {
+              model: Category
+            }
+          }
+        }, 
+        where: {
+          id
+        }
+      })
+      res.render('my-course', {user:user[0].UserCourses})  
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  static async deleteCourse (req, res) {
+    try {
+      let {id} = req.params
+      let data = await Course.getCourseById(id)
+      await data.destroy()
+      res.redirect(`/courses?notif=course ${data.title} has been deleted`)
     } catch (error) {
       res.send(error)
     }

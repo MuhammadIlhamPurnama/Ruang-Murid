@@ -47,6 +47,9 @@ app.post('/profile/edit', Controller.postEditProfile)
 app.get('/courses', Controller.showCourses)
 app.get('/courses/create', Controller.createCourse)
 app.post('/courses/create', Controller.postCreateCourse)
+app.post('/courses/:id/enroll', Controller.enrollCourse)
+app.get('/my-courses', Controller.showMyCourses)
+app.get('/courses/:id/delete', Controller.deleteCourse)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
