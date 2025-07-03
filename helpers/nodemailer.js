@@ -1,19 +1,19 @@
 const nodemailer = require('nodemailer');
 
-async function sendEmail() {
+async function sendEmail(to) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'ilhampurnama678@gmail.com', 
+      user: 'ilhampurnama78@gmail.com', 
       pass: 'vgxdrilhicaznrsd'
     }
   });
 
   const mailOptions = {
-    from: 'ilhampurnama678@gmail.com', 
-    to: 'haritzah.farizi@gmail.com', 
+    from: 'ilhampurnama78@gmail.com', 
+    to: to, 
     subject: 'Halo dari Team Ruang Murid', 
-    text: 'Email ini dikirim pakai Nodemailer!'
+    text: 'Terima kasih telah bergabung dengan Ruang Murid!'
   };
 
   try {

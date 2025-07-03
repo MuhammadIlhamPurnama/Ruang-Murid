@@ -15,7 +15,6 @@ class Controller {
   static async login (req, res) {
     try {
       const {errors} = req.query
-      sendEmail()
       res.render('login', {errors})
     } catch (error) {
       res.send(error)
@@ -75,6 +74,8 @@ class Controller {
         id: user.id,
         role: user.role
       }
+
+      sendEmail(user.email)
 
       res.redirect('/')
     } catch (error) {
