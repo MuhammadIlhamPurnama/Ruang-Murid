@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Courses - Ruang Murid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #28c59d;
+      color: #0B3D2D;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+      font-size: 36px;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .course-card {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 24px;
+      color: white;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .course-card h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .course-card p {
+      font-size: 16px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .course-category {
+      font-size: 14px;
+      font-weight: bold;
+      color: #D2F55C;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Available Courses</h1>
+    <div class="courses-grid">
+      <!-- Card 1 -->
+      <div class="course-card">
+        <h2>UI/UX Fundamentals</h2>
+        <p>Learn the basics of user interface and experience design to build better apps.</p>
+        <div class="course-category">Design</div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="course-card">
+        <h2>Fullstack Web Development</h2>
+        <p>Master both frontend and backend web development using modern tools.</p>
+        <div class="course-category">Web Development</div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="course-card">
+        <h2>Data Analysis with Python</h2>
+        <p>Explore data science using Python libraries like pandas and matplotlib.</p>
+        <div class="course-category">Data Science</div>
+      </div>
+
+      <!-- Tambahkan card lainnya sesuai data -->
+    </div>
+  </div>
+
+</body>
+</html>

@@ -127,6 +127,14 @@ class Controller {
       res.send(error)
     }
   }
+
+  static async showCourses (req, res) {
+    try {
+      res.render('courses')
+    } catch (error) {
+      res.send(error)
+    }
+  }
 }
 
 module.exports = Controller
