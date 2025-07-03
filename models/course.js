@@ -13,12 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Course.belongsTo(models.Category, {foreignKey: "CategoryId"})
       Course.belongsToMany(models.User, {through: models.UserCourse, foreignKey:'CourseId'})
+      Course.belongsTo(models.User, {foreignKey: "TeacherId"})
     }
   }
   Course.init({
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    CategoryId: DataTypes.INTEGER
+    CategoryId: DataTypes.INTEGER,
+    TeacherId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Course',

@@ -38,13 +38,15 @@ app.post('/login', Controller.postLogin)
 app.get('/register', Controller.register)
 app.post('/register', Controller.postRegister)
 
+app.get('/logout', Controller.logout)
 app.use(isLoggedIn)
 app.get('/profile', Controller.profile)
 app.get('/profile/edit', Controller.editProfile)
 app.post('/profile/edit', Controller.postEditProfile)
 
 app.get('/courses', Controller.showCourses)
-
+app.get('/courses/create', Controller.createCourse)
+app.post('/courses/create', Controller.postCreateCourse)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

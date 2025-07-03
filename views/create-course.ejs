@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Course - Ruang Murid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #28c59d;
+      color: #0B3D2D;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 60px auto;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      color: white;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #D2F55C;
+      color: #0B3D2D;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c4e84f;
+    }
+
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Create New Course</h2>
+    <form action="/courses" method="POST">
+      <label for="title">Course Title</label>
+      <input type="text" id="title" name="title" placeholder="e.g. Web Development with Laravel" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="5" placeholder="Course details and learning outcomes..." required></textarea>
+
+      <label for="category">Category</label>
+      <select id="category" name="categoryId" required>
+        <option selected disabled>-- Select Category --</option>
+        <% categories.forEach(el => { %>
+         <option value="<%= el.id %>"><%= el.name %></option>
+        <% }) %>
+      </select>
+
+      <button type="submit">Create Course</button>
+    </form>
+  </div>
+
+</body>
+</html>

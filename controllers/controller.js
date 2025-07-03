@@ -1,4 +1,4 @@
-const {User, Profile} = require("../models/")
+const {User, Profile, Category, Course} = require("../models/")
 const bcrypt = require('bcryptjs')
 class Controller {
   static async home (req, res) {
@@ -44,6 +44,8 @@ class Controller {
       }
       
     } catch (error) {
+      console.log(error);
+      
       res.send(error)
     }
   }
@@ -130,7 +132,40 @@ class Controller {
 
   static async showCourses (req, res) {
     try {
-      res.render('courses')
+      let user = req.session.user
+      res.render('courses', {user})
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  static async logout (req, res) {
+    try {
+      delete req.session.user
+      res.redirect('/')
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  static async createCourse (req, res) {
+    try {
+      let categories = await Category.findAll()
+      res.render('create-course', {categories})
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  static async postCreateCourse (req, res) {
+    try {
+      let {title, description, CategoryId} = req.body
+      await Course.create({
+        title,
+        description,
+        CategoryId
+      })
+      res.redirect('/')
     } catch (error) {
       res.send(error)
     }
